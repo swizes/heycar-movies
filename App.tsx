@@ -1,48 +1,61 @@
-import React, {FC, useEffect} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {Navigator} from '@/navigation/Navigator';
+import React, {useEffect} from 'react';
+import {Alert, LogBox, StatusBar, useColorScheme} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {AppStack} from '@/navigation/AppStack';
-import {store} from '@/redux/store';
-import {Provider} from 'react-redux';
 import {setupAxiosInterceptors} from '@/utils/axiosInterceptors';
 import axios from 'axios';
-import {
-  ColorSchemeName,
-  StatusBar,
-  StyleSheet,
-  useColorScheme,
-} from 'react-native';
+import {ColorProvider} from '@/context/ThemeColorContext';
+import NetInfo from '@react-native-community/netinfo';
+import {useAppDispatch, useAppSelector} from '@/hooks/reduxHooks';
+import {toggleInternetConnection} from '@/redux/slices/app';
 
-const App: FC = () => {
-  const scheme: ColorSchemeName = useColorScheme();
+//Some movies do not have any poster, and we are handling that by showing the app's logo instead of empty image view
+LogBox.ignoreLogs(['Could not find image']);
+
+const App: React.FC = () => {
+  const scheme = useColorScheme();
+  const dispatch = useAppDispatch();
+
+  const hasInternetConnection = useAppSelector(
+    state => state.app.hasInternetConnection,
+  );
 
   useEffect(() => {
     setupAxiosInterceptors(axios);
-  });
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener(state => {
+      if (hasInternetConnection !== !!state.isConnected) {
+        dispatch(toggleInternetConnection({bool: !!state.isConnected}));
+        if (!state.isConnected) {
+          Alert.alert('Internet connection is lost');
+        }
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [dispatch, hasInternetConnection]);
 
   return (
-    <Provider store={store}>
+    <>
       <StatusBar
         barStyle={scheme === 'dark' ? 'light-content' : 'dark-content'}
         translucent={true}
         backgroundColor={'transparent'}
       />
-      <SafeAreaProvider>
-        <GestureHandlerRootView style={styles.gestureHandlerContainer}>
-          <NavigationContainer>
-            <AppStack />
-          </NavigationContainer>
+      <ColorProvider>
+        <GestureHandlerRootView style={{flex: 1}}>
+          <SafeAreaProvider>
+            <Navigator scheme={scheme} />
+          </SafeAreaProvider>
         </GestureHandlerRootView>
-      </SafeAreaProvider>
-    </Provider>
+      </ColorProvider>
+    </>
   );
 };
-
-const styles = StyleSheet.create({
-  gestureHandlerContainer: {
-    flex: 1,
-  },
-});
 
 export default App;

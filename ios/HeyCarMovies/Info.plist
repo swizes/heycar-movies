@@ -37,8 +37,21 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>KumbhSans-Black.ttf</string>
+		<string>KumbhSans-Bold.ttf</string>
+		<string>KumbhSans-ExtraBold.ttf</string>
+		<string>KumbhSans-ExtraLight.ttf</string>
+		<string>KumbhSans-Light.ttf</string>
+		<string>KumbhSans-Medium.ttf</string>
+		<string>KumbhSans-Regular.ttf</string>
+		<string>KumbhSans-SemiBold.ttf</string>
+		<string>KumbhSans-Thin.ttf</string>
+		<string>Ionicons.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
+	<string>BootSplash</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -46,8 +59,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
