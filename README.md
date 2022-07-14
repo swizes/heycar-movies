@@ -43,8 +43,10 @@ yarn run start
 
 Then
 ```
-yarn run ios
+yarn run ios // npx react-native run-ios
 ```
+
+If above command fails, open the Heycarmovies.xcworkspace via Xcode in ios folder and run
 
 ### Project Structure
 
