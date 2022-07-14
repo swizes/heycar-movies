@@ -5,7 +5,7 @@ import {
   useSafeAreaFrame,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
-import {useAppDispatch, useAppSelector} from '@/hooks/reduxHooks';
+import {useAppSelector} from '@/hooks/reduxHooks';
 import {useRoute, useTheme} from '@react-navigation/native';
 import {DetailScreenRouteProp} from '@/types/AppStackParams';
 
@@ -78,7 +78,7 @@ export const DetailScreen: FC = () => {
             setState({
               loading: false,
               movie: res.data,
-              error: '',
+              error: undefined,
             });
           }
         })
@@ -99,7 +99,7 @@ export const DetailScreen: FC = () => {
   }
 
   if (error || !movie) {
-    return <ErrorView error={error || MOVIE_NOT_FOUND} />;
+    return <ErrorView showBackButton={true} error={error || MOVIE_NOT_FOUND} />;
   }
 
   return (

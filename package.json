@@ -6,8 +6,9 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint '**/*.{js,ts,tsx}'",
+    "prettier:write": "prettier --write '**/*.{ts,tsx}'",
+    "prettier:check": "prettier --check '**/*.{ts,tsx}'"
   },
   "dependencies": {
     "@react-native-community/netinfo": "^9.3.0",

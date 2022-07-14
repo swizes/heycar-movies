@@ -87,7 +87,7 @@ export const SearchScreen: FC = () => {
     if (status === 'loading') {
       return <LoadingView />;
     } else if (error) {
-      return <ErrorView error={NO_RESULT_ON_SEARCH} />;
+      return <ErrorView error={error} />;
     } else {
       return (
         <EmptyListMessageView

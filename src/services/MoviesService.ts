@@ -13,10 +13,6 @@ class MoviesService {
     });
   }
 
-  async getMovies() {
-    return axios.get(MOVIES_API_BASE_URL);
-  }
-
   async searchMovies(searchValue: string, page: number) {
     return axios.get(MOVIES_API_BASE_URL, {
       params: {

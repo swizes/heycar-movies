@@ -16,46 +16,50 @@ import typography from '@/theme/typography';
 import spacing from '@/theme/spacing';
 import metrics from '@/theme/metrics';
 import {AppImage} from '@/components/Image/AppImage';
-import {Movie} from '@/types/Movie';
 import {colorsPalette} from '@/theme/colorsPalette';
 
-export const FavoriteMoviesListItem: FC<Movie> = React.memo(
-  ({Title, imdbID, Year, Type, Poster, Plot, imdbRating}) => {
-    const navigation =
-      useNavigation<StackNavigationProp<AppStackParamsProps>>();
+export const FavoriteMoviesListItem: FC<{
+  Title: string;
+  imdbID: string;
+  Year: string;
+  Type: string;
+  Poster: string;
+  Plot: string;
+  imdbRating: string;
+}> = React.memo(({Title, imdbID, Year, Type, Poster, Plot, imdbRating}) => {
+  const navigation = useNavigation<StackNavigationProp<AppStackParamsProps>>();
 
-    const navigateToDetailScreen = useCallback(() => {
-      navigation.push(ScreenRoutes.Detail, {id: imdbID});
-    }, [navigation, imdbID]);
+  const navigateToDetailScreen = useCallback(() => {
+    navigation.push(ScreenRoutes.Detail, {id: imdbID});
+  }, [navigation, imdbID]);
 
-    return (
-      <Pressable
-        onPress={navigateToDetailScreen}
-        key={imdbID}
-        testID={`movie_list_item_${imdbID}`}
-        style={styles.container}>
-        <AppImage source={{uri: Poster}} style={styles.image} />
-        <View style={styles.infoContainer}>
-          <AppText style={styles.title} numberOfLines={1}>
-            {Title}
-          </AppText>
-          <AppText numberOfLines={1} style={styles.text}>
-            Year: {Year}
-          </AppText>
-          <AppText numberOfLines={1} style={styles.text}>
-            Type: {Type}
-          </AppText>
-          <AppText numberOfLines={1} style={styles.text}>
-            Rating: {imdbRating}
-          </AppText>
-          <AppText numberOfLines={3} style={styles.text}>
-            {Plot}
-          </AppText>
-        </View>
-      </Pressable>
-    );
-  },
-);
+  return (
+    <Pressable
+      onPress={navigateToDetailScreen}
+      key={imdbID}
+      testID={`movie_list_item_${imdbID}`}
+      style={styles.container}>
+      <AppImage source={{uri: Poster}} style={styles.image} />
+      <View style={styles.infoContainer}>
+        <AppText style={styles.title} numberOfLines={1}>
+          {Title}
+        </AppText>
+        <AppText numberOfLines={1} style={styles.text}>
+          Year: {Year}
+        </AppText>
+        <AppText numberOfLines={1} style={styles.text}>
+          Type: {Type}
+        </AppText>
+        <AppText numberOfLines={1} style={styles.text}>
+          Rating: {imdbRating}
+        </AppText>
+        <AppText numberOfLines={3} style={styles.text}>
+          {Plot}
+        </AppText>
+      </View>
+    </Pressable>
+  );
+});
 
 type Styles = {
   container: ViewStyle;

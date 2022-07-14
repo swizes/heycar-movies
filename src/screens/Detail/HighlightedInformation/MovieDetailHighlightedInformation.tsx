@@ -37,7 +37,7 @@ export const MovieDetailHighlightedInformation: FC<{movie: Movie}> = ({
           </Text>
         </View>
         <View style={styles.ratingContainer}>
-          <RatingBar rating={parseInt(imdbRating)} />
+          <RatingBar rating={parseInt(imdbRating, 10)} />
         </View>
       </Animated.View>
     </View>

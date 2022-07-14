@@ -39,6 +39,7 @@ const onResponseError = (error: AxiosError): Promise<AxiosError> => {
 export function setupAxiosInterceptors(
   axiosInstance: AxiosInstance,
 ): AxiosInstance {
+  axiosInstance.defaults.timeout = 5000;
   axiosInstance.interceptors.request.use(onRequest, onRequestError);
   axiosInstance.interceptors.response.use(onResponse, onResponseError);
   return axiosInstance;

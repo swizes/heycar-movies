@@ -14,7 +14,6 @@ import {
   selectFavoriteMoviesError,
   selectFavoriteMoviesStatus,
 } from '@/redux/slices/favoriteMovies';
-import {MovieListItem} from '@/components/MovieListItem/MovieListItem';
 import {FavoriteMoviesListItem} from '@/screens/Home/FavoriteMoviesListItem';
 
 const _renderItem = ({item}: {item: Movie}) => {
